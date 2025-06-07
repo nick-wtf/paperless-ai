@@ -28,6 +28,6 @@ jobs:
 
       - name: Package and push Helm chart
         run: |
-          helm package ./charts/paperless-ai --app-version ${{ github.sha }} --version 0.1.${{ github.run_number }}
+          helm package . --app-version ${{ github.sha }} --version 0.1.${{ github.run_number }}
           helm push paperless-ai-0.1.${{ github.run_number }}.tgz oci://${{ secrets.OCI_REGISTRY_URL }}/paperless-ai
         working-directory: .
