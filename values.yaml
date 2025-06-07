@@ -1,0 +1,44 @@
+# Default values for paperless-ai
+replicaCount: 1
+
+image:
+  repository: clusterzx/paperless-ai
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets: []
+
+service:
+  type: ClusterIP
+  port: 3000
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: docs-ai.nick.wtf
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: docs-ai-tls
+      hosts:
+        - docs-ai.nick.wtf
+
+resources: {}
+
+# Additional environment variables to pass to the container
+env: {}
+  # HOST: "0.0.0.0"
+  # MY_CUSTOM_VAR: "value"
+
+persistence:
+  enabled: true
+  storageClass: ""
+  accessMode: ReadWriteOnce
+  size: 10Gi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
